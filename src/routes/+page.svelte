@@ -27,7 +27,7 @@
 
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const defaultPlace = {
-    name: 'Rinconada Library',
+    name: 'Promise Energy',
     address: '1213 Newell Rd, Palo Alto, CA 94303',
   };
   let location: google.maps.LatLng | undefined;
@@ -86,24 +86,7 @@
         <SearchBar bind:location {placesLibrary} {map} initialValue={defaultPlace.name} />
       {/if}
 
-      <div class="p-4 surface-variant outline-text rounded-lg space-y-3">
-        <p>
-          <a
-            class="primary-text"
-            href="https://developers.google.com/maps/documentation/solar/overview?hl=en"
-            target="_blank"
-          >
-            Two distinct endpoints of the <b>Solar API</b>
-            <md-icon class="text-sm">open_in_new</md-icon>
-          </a>
-          offer many benefits to solar marketplace websites, solar installers, and solar SaaS designers.
-        </p>
-
-        <p>
-          <b>Click on an area below</b>
-          to see what type of information the Solar API can provide.
-        </p>
-      </div>
+      
 
       {#if location}
         <Sections {location} {map} {geometryLibrary} {googleMapsApiKey} />
@@ -111,19 +94,9 @@
 
       <div class="grow" />
 
-      <div class="flex flex-col items-center w-full">
-        <md-text-button
-          href="https://github.com/googlemaps-samples/js-solar-potential"
-          target="_blank"
-        >
-          View code on GitHub
-          <img slot="icon" src="github-mark.svg" alt="GitHub" width="16" height="16" />
-        </md-text-button>
-      </div>
+      
 
-      <span class="pb-4 text-center outline-text label-small">
-        This is not an officially supported Google product.
-      </span>
+      
     </div>
   </aside>
 </div>

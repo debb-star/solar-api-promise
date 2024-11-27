@@ -1,21 +1,4 @@
 <!doctype html>
-
-<!--
- Copyright 2023 Google LLC
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-      https://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- -->
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -24,7 +7,11 @@
       href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
-    <meta name="viewport" content="width=device-width" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     %sveltekit.head%
 
     <!-- Google tag (gtag.js) -->
@@ -35,12 +22,330 @@
         dataLayer.push(arguments);
       }
       gtag('js', new Date());
-
       gtag('config', 'G-ELSHHVFHYD');
     </script>
+
+    <style>
+      /* General reset and box-sizing for consistent layout */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Smooth scroll for a better experience */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Body styling */
+      body {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 0;
+        background-color: #f7f9fc;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Page container styling */
+      .page-container {
+        width: 100%;
+        max-width: 1400px;
+        padding: 0 20px;
+      }
+
+      /* Header styling */
+      .header {
+        background-color: #14213d;
+        color: #ffffff;
+        padding: 15px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header h1 {
+        font-size: 24px;
+        margin: 0;
+        font-weight: 700;
+        color: #fca311;
+      }
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+      .nav-links a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover {
+        color: #fca311;
+      }
+
+      /* Hero section */
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 0;
+        background-color: #f0f2f5;
+        color: #333;
+      }
+      .hero h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      .hero p {
+        font-size: 18px;
+        max-width: 700px;
+        margin: 0 auto 20px;
+        line-height: 1.6;
+      }
+      .hero .cta-button {
+        padding: 12px 24px;
+        background-color: #fca311;
+        color: #ffffff;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s;
+      }
+      .hero .cta-button:hover {
+        background-color: #e38f0d;
+      }
+
+      /* Features section */
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+        padding: 40px 0;
+      }
+      .feature {
+        flex: 1;
+        min-width: 280px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+      }
+      .feature h3 {
+        font-size: 20px;
+        color: #14213d;
+        margin-bottom: 10px;
+      }
+      .feature p {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* SvelteKit content container */
+      .sveltekit-container {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-x: scroll;
+        width: 100%;
+        max-width: 1800px;
+        height: 1000px;
+        margin: 1px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Inner content with blur effect */
+      .blur-content {
+        filter: blur(20px);
+        transition: filter 0.3s;
+      }
+
+      /* Overlay within the sveltekit container */
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+      }
+
+      .second-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+      }
+
+      .overlay-window {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .overlay h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .overlay button {
+        padding: 10px 20px;
+        background-color: #fca311;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s;
+      }
+
+      .overlay button:hover {
+        background-color: #e38f0d;
+      }
+      
+      /* Second overlay form styling */
+      .second-overlay form input, .second-overlay form button {
+        margin-top: 10px;
+        padding: 10px;
+        width: 90%;
+        max-width: 300px;
+        border-radius: 6px;
+      }
+
+      .second-overlay form input {
+        border: 1px solid #ccc;
+      }
+
+      .second-overlay form button {
+        background-color: #fca311;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      .second-overlay form button:hover {
+        background-color: #e38f0d;
+      }
+    </style>
   </head>
 
   <body data-sveltekit-preload-data="hover">
-    <div style="display: contents">%sveltekit.body%</div>
+    <div class="page-container">
+      <!-- Header -->
+      <header class="header">
+        <h1>             Promise Energy</h1>
+        <nav class="nav-links">
+          <a href="https://promiseenergy.com/what-we-do">Services</a>
+          <a href="https://promiseenergy.com/about">About Us</a>
+          <a href="https://promiseenergy.com/contact">Contact</a>
+        </nav>
+      </header>
+
+      <!-- Hero Section -->
+      <section class="hero">
+        <div>
+          <h2>Your Trusted Partner in Renewable Energy Solutions</h2>
+          <p>Promise Energy is committed to delivering innovative, sustainable, and cost-effective energy solutions tailored to your business needs. Discover how we can help you achieve energy efficiency and meet compliance standards.</p>
+          <a href="https://promiseenergy.com/" class="cta-button">Get Started</a>
+        </div>
+      </section>
+
+      <!-- Centered SvelteKit Content Container -->
+      <div class="sveltekit-container" id="sveltekit-container">
+        <div class="blur-content" id="blur-content">
+          %sveltekit.body%
+        </div>
+
+        <!-- First Overlay Section -->
+        <div class="overlay" id="overlay">
+          <div class="overlay-window">
+            <h2>Do you want to check your power saving with solar implementation?</h2>
+            <button onclick="triggerSecondOverlay()">Yes, Show Me</button>
+          </div>
+        </div>
+
+        <!-- Second Overlay Section for Report Request -->
+        <div class="second-overlay" id="second-overlay">
+          <div class="overlay-window">
+            <h2>Get a Detailed Report</h2>
+            <p>If you want a detailed report, please enter your name and email below.</p>
+            <form>
+              <input type="text" placeholder="Name" required />
+              <input type="email" placeholder="Email" required />
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features Section -->
+      <section id="services" class="features">
+        <div class="feature">
+          <h3>Battery Energy Storage Systems</h3>
+          <p>Optimize energy storage and improve efficiency with our advanced battery solutions, designed to meet your facility's unique needs.</p>
+        </div>
+        <div class="feature">
+          <h3>HVAC Upgrades</h3>
+          <p>Enhance your building’s energy efficiency with state-of-the-art HVAC systems, ensuring a comfortable environment while saving on energy costs.</p>
+        </div>
+        <div class="feature">
+          <h3>Zero Net Energy Projects</h3>
+          <p>Invest in the future with our Zero Net Energy projects, designed to make your business environmentally responsible and economically sustainable.</p>
+        </div>
+        <div class="feature">
+          <h3>EV Charging Solutions</h3>
+          <p>Support the electric vehicle revolution with our EV charging stations, an essential amenity for modern businesses and communities.</p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>&copy; 2023 Promise Energy | <a href="#contact">Contact Us</a></p>
+      </footer>
+    </div>
+
+    <script>
+      // Scroll to the absolute left on load
+      window.onload = function() {
+        document.getElementById("sveltekit-container").scrollLeft = 0;
+      };
+
+      function removeBlur() {
+        document.getElementById("blur-content").style.filter = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+
+      function triggerSecondOverlay() {
+        removeBlur();
+        setTimeout(() => {
+          document.getElementById("blur-content").style.filter = "blur(20px)";
+          document.getElementById("second-overlay").style.display = "flex";
+        }, 30000);
+      }
+    </script>
   </body>
 </html>
