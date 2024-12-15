@@ -49,13 +49,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-
-      /* Page container styling */
-      .page-container {
-        width: 100%;
-        max-width: 1400px;
-        padding: 0 20px;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
       }
 
       /* Header styling */
@@ -66,23 +62,31 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
+
       .header h1 {
         font-size: 24px;
         margin: 0;
         font-weight: 700;
         color: #fca311;
       }
+
       .nav-links {
         display: flex;
         gap: 20px;
       }
+
       .nav-links a {
         color: #ffffff;
         text-decoration: none;
         font-weight: 500;
         transition: color 0.3s;
       }
+
       .nav-links a:hover {
         color: #fca311;
       }
@@ -93,21 +97,25 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 60px 0;
+        padding: 60px 20px;
         background-color: #f0f2f5;
         color: #333;
+        width: 100%;
       }
+
       .hero h2 {
         font-size: 36px;
         font-weight: 700;
         margin-bottom: 20px;
       }
+
       .hero p {
         font-size: 18px;
         max-width: 700px;
         margin: 0 auto 20px;
         line-height: 1.6;
       }
+
       .hero .cta-button {
         padding: 12px 24px;
         background-color: #fca311;
@@ -117,6 +125,7 @@
         font-weight: 600;
         transition: background-color 0.3s;
       }
+
       .hero .cta-button:hover {
         background-color: #e38f0d;
       }
@@ -128,7 +137,9 @@
         gap: 20px;
         justify-content: space-between;
         padding: 40px 0;
+        width: 100%;
       }
+
       .feature {
         flex: 1;
         min-width: 280px;
@@ -137,42 +148,50 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: #ffffff;
       }
+
       .feature h3 {
         font-size: 20px;
         color: #14213d;
         margin-bottom: 10px;
       }
+
       .feature p {
         color: #666;
         line-height: 1.6;
       }
 
       /* SvelteKit content container */
-      .sveltekit-container {
+      .sveltekit-body {
         position: relative;
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        overflow-x: scroll;
         width: 100%;
-        max-width: 1800px;
-        height: 1000px;
-        margin: 1px auto;
+        height: 100%;
         padding: 20px;
         background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        filter: blur(5px); /* Apply blur initially */
+        transition: filter 0.3s ease;
       }
 
-      /* Inner content with blur effect */
-      .blur-content {
-        filter: blur(20px);
-        transition: filter 0.3s;
+      /* Don't blur the floating tabs */
+      .floating-tab, .floating-footer {
+        z-index: 1001;
       }
 
-      /* Overlay within the sveltekit container */
+      /* SvelteKit container */
+      .sveltekit-body-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Overlay styling for the popup */
       .overlay {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
@@ -181,20 +200,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 8px;
-      }
-
-      .second-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        border-radius: 8px;
+        z-index: 1001;
       }
 
       .overlay-window {
@@ -203,12 +209,18 @@
         border-radius: 8px;
         text-align: center;
         max-width: 400px;
-        width: 90%;
+        width: 80%;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
       .overlay h2 {
         font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .overlay p {
+        font-size: 18px;
         color: #333;
         margin-bottom: 20px;
       }
@@ -227,28 +239,87 @@
       .overlay button:hover {
         background-color: #e38f0d;
       }
-      
-      /* Second overlay form styling */
-      .second-overlay form input, .second-overlay form button {
-        margin-top: 10px;
-        padding: 10px;
-        width: 90%;
-        max-width: 300px;
-        border-radius: 6px;
+
+      /* Floating Tab (Top) styling */
+      .floating-tab {
+        position: fixed;
+        top: 80px; /* Adjusted lower */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #003366; /* Deep blue */
+        color: #ff6600; /* Orange text */
+        padding: 12px 30px;
+        border-radius: 35px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        width: 60%; /* Reduced width */
       }
 
-      .second-overlay form input {
-        border: 1px solid #ccc;
+      .floating-tab h1 {
+        font-size: 26px;
+        margin: 0;
+        font-weight: 700;
+        color: #ff6600;
       }
 
-      .second-overlay form button {
-        background-color: #fca311;
-        color: #fff;
-        border: none;
-        cursor: pointer;
+      .floating-tab .nav-links {
+        display: flex;
+        gap: 25px;
       }
-      .second-overlay form button:hover {
-        background-color: #e38f0d;
+
+      .floating-tab .nav-links a {
+        color: #ff6600; /* Orange text */
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+
+      .floating-tab .nav-links a:hover {
+        color: #ffffff; /* White text on hover */
+      }
+
+      /* Floating Tab (Bottom) styling */
+      .floating-footer {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #003366; /* Deep blue */
+        color: #ff6600; /* Orange text */
+        padding: 12px 30px;
+        border-radius: 35px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        width: 60%; /* Reduced width */
+      }
+
+      .floating-footer p {
+        font-size: 16px;
+        margin: 0;
+        font-weight: 600;
+        color: #ff6600;
+      }
+
+      .floating-footer .footer-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .floating-footer .footer-links a {
+        color: #ff6600; /* Orange text */
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .floating-footer .footer-links a:hover {
+        color: #ffffff; /* White text on hover */
       }
     </style>
   </head>
@@ -257,13 +328,23 @@
     <div class="page-container">
       <!-- Header -->
       <header class="header">
-        <h1>             Promise Energy</h1>
+        <h1>Promise Energy</h1>
         <nav class="nav-links">
           <a href="https://promiseenergy.com/what-we-do">Services</a>
           <a href="https://promiseenergy.com/about">About Us</a>
           <a href="https://promiseenergy.com/contact">Contact</a>
         </nav>
       </header>
+
+      <!-- Floating Tab (Top) -->
+      <div class="floating-tab">
+        <h1>Promise Energy</h1>
+        <nav class="nav-links">
+          <a href="https://promiseenergy.com/what-we-do">Services</a>
+          <a href="https://promiseenergy.com/about">About Us</a>
+          <a href="https://promiseenergy.com/contact">Contact</a>
+        </nav>
+      </div>
 
       <!-- Hero Section -->
       <section class="hero">
@@ -274,31 +355,39 @@
         </div>
       </section>
 
-      <!-- Centered SvelteKit Content Container -->
-      <div class="sveltekit-container" id="sveltekit-container">
-        <div class="blur-content" id="blur-content">
+      <!-- Fullscreen SvelteKit Body in a Container -->
+      <div class="sveltekit-body">
+        <div class="sveltekit-body-container">
           %sveltekit.body%
         </div>
+      </div>
 
-        <!-- First Overlay Section -->
-        <div class="overlay" id="overlay">
-          <div class="overlay-window">
-            <h2>Do you want to check your power saving with solar implementation?</h2>
-            <button onclick="triggerSecondOverlay()">Yes, Show Me</button>
-          </div>
+      <!-- Floating Tab (Bottom) -->
+      <div class="floating-footer">
+        <p>&copy; 2023 Promise Energy</p>
+        <nav class="footer-links">
+          <a href="mailto:info@promiseenergy.com">info@promiseenergy.com</a>
+          <a href="#">(888) 444-7911</a>
+        </nav>
+      </div>
+
+      <!-- Overlay Popup (Welcome) -->
+      <div class="overlay" id="popup-overlay">
+        <div class="overlay-window">
+          <h2>Welcome to Promise Energy</h2>
+          <p>Explore the Google Solar API tool! This tool helps analyze solar output and shows how you can save on energy costs by implementing solar panels. Click below to try it out!</p>
+          <button onclick="closePopup()">Try it</button>
         </div>
+      </div>
 
-        <!-- Second Overlay Section for Report Request -->
-        <div class="second-overlay" id="second-overlay">
-          <div class="overlay-window">
-            <h2>Get a Detailed Report</h2>
-            <p>If you want a detailed report, please enter your name and email below.</p>
-            <form>
-              <input type="text" placeholder="Name" required />
-              <input type="email" placeholder="Email" required />
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+      <!-- Overlay Popup (CTA) after 50 seconds -->
+      <div class="overlay" id="cta-popup-overlay" style="display:none;">
+        <div class="overlay-window">
+          <h2>Ready to Save on Energy?</h2>
+          <p>Get in touch with us to discuss how implementing solar panels can help you save on energy costs and contribute to a sustainable future.</p>
+          <button onclick="window.location.href='https://promiseenergy.com/contact'">Contact Us</button>
+          <!-- Close Button -->
+          <button onclick="closeCTAPopup()">Close</button>
         </div>
       </div>
 
@@ -329,23 +418,29 @@
     </div>
 
     <script>
-      // Scroll to the absolute left on load
+      // Function to remove the blur and close the welcome popup
+      function closePopup() {
+        document.getElementById('popup-overlay').style.display = 'none'; // Close welcome popup
+        document.querySelector('.sveltekit-body').style.filter = 'none'; // Unblur content
+      }
+
+      // Function to close the CTA popup
+      function closeCTAPopup() {
+        document.getElementById('cta-popup-overlay').style.display = 'none'; // Close CTA popup
+      }
+
+      // Function to show the CTA popup after 50 seconds
+      setTimeout(function() {
+        document.getElementById('cta-popup-overlay').style.display = 'flex'; // Show CTA popup
+      }, 50000); // 50 seconds
+
+      // Set timeout to trigger the first popup on page load
       window.onload = function() {
-        document.getElementById("sveltekit-container").scrollLeft = 0;
-      };
-
-      function removeBlur() {
-        document.getElementById("blur-content").style.filter = "none";
-        document.getElementById("overlay").style.display = "none";
-      }
-
-      function triggerSecondOverlay() {
-        removeBlur();
         setTimeout(() => {
-          document.getElementById("blur-content").style.filter = "blur(20px)";
-          document.getElementById("second-overlay").style.display = "flex";
-        }, 30000);
-      }
+          document.querySelector('.sveltekit-body').style.filter = 'blur(5px)'; // Blur the content
+          document.getElementById('popup-overlay').style.display = 'flex'; // Show welcome popup
+        }, 1000); // Wait for 1 second before showing the popup
+      };
     </script>
   </body>
 </html>
